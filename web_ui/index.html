@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script typs="text/javascript" src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </head>
+  <body>
+    <div>
+      <div>
+        <input id="amount" type="number" min="1" max="5000"></input>
+      </div>
+      <div>
+        <button id="in" type="button">Pump in</button><br/>
+        <button id="out" type="button">Pump out</button><br/>
+      </div>
+    </div>
+    <div>
+      <input id="height" type="number" min="0" max="120"></input>
+      <button id="wave" type="button">Wave</button><br/>
+    </div>
+    <div>
+      <input id="frequency" type="number" min="7000" max="15000"></input>
+      <button id="frequencyBtn" type="button">Set Wave Frequency</button><br/>
+    </div>
+    <div>
+      <input id="delay" type="number" min="2" max="7"></input>
+      <button id="delayBtn" type="button">Set Servo Step Delay</button><br/>
+    </div>
+    <ul id="messages"></ul>
+  </body>
+</html>
