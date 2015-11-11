@@ -14,6 +14,9 @@
 #define RED_PIN 3
 #define YELLOW_PIN 5
 #define GREEN_PIN 6
+#define RED_MASK 1
+#define YELLOW_MASK ( 1 << 1 )
+#define GREEN_MASK ( 1 << 2 )
 
 Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
 Adafruit_StepperMotor *myStepper = AFMS.getStepper(200, 2);
@@ -36,9 +39,11 @@ unsigned long servoFrequency = 7000;
 unsigned long servoDelay = 2;
 
 unsigned long keepAliveNextCheck = 0;
-unsigned long redLEDNextCheck = 0;
-unsigned long yellowLEDNextCheck = 0;
-unsigned long greenLEDNextCheck = 0;
+
+int LEDBreathingState = 0;
+int LEDRedValue = 0;
+int LEDYellowValue = 0;
+int LEDGreenValue = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -87,6 +92,17 @@ void checkSerial() {
       tide(UP, val);
     } else if (command == "tidedown") {
       tide(DOWN, val);
+    } else if (command == "breathingstate") {
+      LEDBreathingState = val;
+    } else if (command == "red") {
+      LEDBreathingState &= ~RED_MASK;
+      analogWrite(RED_PIN, val);
+    } else if (command == "yellow") {
+      LEDBreathingState &= ~YELLOW_MASK;
+      analogWrite(YELLOW_PIN, val);
+    } else if (command == "green") {
+      LEDBreathingState &= ~GREEN_MASK;
+      analogWrite(GREEN_PIN, val);
     } else {
       Serial.println("Command not understood!");
     }
@@ -134,9 +150,21 @@ void checkStepper() {
 
 int counter = 0;
 
+void updateLED() {
+  float val = (exp(sin(now/2000.0*PI)) - 0.36787944)*108.0;
+  if(LEDBreathingState & RED_MASK) {
+    analogWrite(RED_PIN, val);
+  }
+  if(LEDBreathingState & YELLOW_MASK) {
+    analogWrite(YELLOW_PIN, val);
+  }
+  if(LEDBreathingState & GREEN_MASK) {
+    analogWrite(GREEN_PIN, val);
+  }
+}
+
 void loop() {
   now = millis();
-  float val;
   if(now >= serialNextCheck) {
     checkSerial();
   }
@@ -150,22 +178,8 @@ void loop() {
     Serial.println("I'm alive");
     keepAliveNextCheck = now + 2000;
   }
-  val = (exp(sin(millis()/2000.0*PI)) - 0.36787944)*108.0;
-  switch(counter % 3) {
-    case 0:
-      analogWrite(RED_PIN, val);
-      break;
-    case 1:
-      analogWrite(YELLOW_PIN, val);
-      break;
-    case 2:
-      analogWrite(GREEN_PIN, val);
-      break;
-  }
-
-  if(val == 0) {
-    //++counter;
-    //delay(1);
+  if(LEDBreathingState) {
+    updateLED();
   }
 }
 
