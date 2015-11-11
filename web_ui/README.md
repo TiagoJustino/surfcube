@@ -16,4 +16,4 @@ Run the server:
 
 ```node server.js```
 
-Open the [localhost:3000](localhost:3000) address on your browser.
+Open the [localhost:3000](http://localhost:3000/) address on your browser.
