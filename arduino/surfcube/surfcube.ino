@@ -40,7 +40,17 @@ unsigned long servoDelay = 2;
 
 unsigned long keepAliveNextCheck = 0;
 
-int LEDBreathingState = 0;
+/*
+   0 -> OFF
+   1 -> red
+   2 -> yellow
+   3 -> red + yellow
+   4 -> green
+   5 -> red + green
+   6 -> yellow + green
+   7 -> red + yellow + green
+   */
+int LEDBreathingState = RED_MASK & YELLOW_MASK & GREEN_MASK;
 int LEDRedValue = 0;
 int LEDYellowValue = 0;
 int LEDGreenValue = 0;
