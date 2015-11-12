@@ -4,6 +4,12 @@ $(document).ready(function() {
     $('#messages').append($('<li>').text(data));
   });
 
+  var ping = function() {
+    console.log("sending servo command");
+    socket.emit('to serial', "ping");
+    socket.emit('to serial', 0);
+  }
+
   var sendWave = function() {
     console.log("sending servo command");
     socket.emit('to serial', "servo");
@@ -28,6 +34,18 @@ $(document).ready(function() {
     socket.emit('to serial', $( "#breathing" ).val() );
   }
 
+  var sendStepperPos = function() {
+    console.log("sending servo command");
+    socket.emit('to serial', "setstepperposition");
+    socket.emit('to serial', $( "#stepperPos" ).val() );
+  }
+
+  var sendTide = function() {
+    console.log("sending servo command");
+    socket.emit('to serial', "tide");
+    socket.emit('to serial', $( "#tide" ).val() );
+  }
+
   $( "#in" ).click(function() {
     console.log("sending forward command");
     socket.emit('to serial', "forward");
@@ -40,13 +58,13 @@ $(document).ready(function() {
     socket.emit('to serial', $( "#amount" ).val() );
   });
 
+  $( "#ping" ).click(ping);
   $( "#wave" ).click(sendWave);
-
   $( "#frequencyBtn" ).click(sendFrequency);
-
   $( "#delayBtn" ).click(sendDelay);
-
   $( "#breathingBtn" ).click(sendBreathing);
+  $( "#stepperPosBtn" ).click(sendStepperPos);
+  $( "#tideBtn" ).click(sendTide);
 
   $('#height').keyup(function(e){
     if(e.keyCode == 13)
@@ -73,6 +91,20 @@ $(document).ready(function() {
     if(e.keyCode == 13)
     {
       sendBreathing();
+    }
+  });
+
+  $('#stepperPos').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+      sendStepperPos();
+    }
+  });
+
+  $('#tide').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+      sendTide();
     }
   });
 

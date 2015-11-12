@@ -7,13 +7,20 @@
   </head>
   <body>
     <div>
-      <div>
+      <button id="ping" type="button">Ping</button><br/>
+    </div>
+    <div>
+      <div style="display:inline-block">
         <input id="amount" type="number" min="1" max="5000"></input>
       </div>
-      <div>
+      <div style="display:inline-block">
         <button id="in" type="button">Pump in</button><br/>
         <button id="out" type="button">Pump out</button><br/>
       </div>
+    </div>
+    <div>
+      <input id="tide" type="number" min="0" max="120"></input>
+      <button id="tideBtn" type="button">Tide</button><br/>
     </div>
     <div>
       <input id="height" type="number" min="0" max="120"></input>
@@ -30,6 +37,10 @@
     <div>
       <input id="breathing" type="number" min="0" max="7"></input>
       <button id="breathingBtn" type="button">Set Breathing LED</button><br/>
+    </div>
+    <div>
+      <input id="stepperPos" type="number" min="0" max=18600></input>
+      <button id="stepperPosBtn" type="button">Set Stepper Position</button><br/>
     </div>
     <ul id="messages"></ul>
   </body>

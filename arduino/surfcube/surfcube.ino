@@ -4,10 +4,14 @@
 #include <Servo.h> 
 #include <EEPROM.h>
 
+#define clamp(x, low, high) max(low, min(x, high));
+
 #define SERVO_MAX_ANGLE 115
 #define CUBE_LEGTH 127
 #define CUBE_WIDTH 80
+#define CUBE_BASE_AREA (CUBE_LEGTH * CUBE_WIDTH)
 #define STEPS_PER_ML 62
+#define STEPPER_MAX_POSITION (STEPS_PER_ML * 300)
 #define EEPROM_STEPPER_ADDR 0
 #define UP 1
 #define DOWN 0
@@ -26,10 +30,8 @@ unsigned long now = 0;
 
 unsigned long serialNextCheck = 0;
 
-int stepperDirection = FORWARD;
-int stepperSteps = 0;
 int stepperCurrentPosition;
-unsigned long stepperNextCheck = 0;
+int stepperTargetPosition;
 
 int servoUserTargetAngle = SERVO_MAX_ANGLE;
 int servoTargetAngle = SERVO_MAX_ANGLE;
@@ -50,7 +52,7 @@ unsigned long keepAliveNextCheck = 0;
    6 -> yellow + green
    7 -> red + yellow + green
    */
-int LEDBreathingState = 7;
+int LEDBreathingState = 0;
 int LEDRedValue = 0;
 int LEDYellowValue = 0;
 int LEDGreenValue = 0;
@@ -64,13 +66,26 @@ void setup() {
 
   servo.write(SERVO_MAX_ANGLE);
 
+  EEPROM.get(EEPROM_STEPPER_ADDR, stepperCurrentPosition);
+  stepperTargetPosition = stepperCurrentPosition;
+  Serial.print("read stepperCurrentPosition from EEPROM: ");
+  Serial.println(stepperCurrentPosition);
+
   pinMode(RED_PIN, OUTPUT);
   pinMode(YELLOW_PIN, OUTPUT);
   pinMode(GREEN_PIN, OUTPUT);
 }
 
-void tide (int tideDirection, int amount) {
-  // TODO
+/*
+   mm -> number of milimeters above the minimum.
+   */
+void tide(int mm) {
+  float mm3, ml;
+
+  mm3 = mm * CUBE_BASE_AREA;
+  ml = mm3 / 1000;
+  stepperTargetPosition = ml * STEPS_PER_ML;
+  stepperTargetPosition = clamp(stepperTargetPosition, 0, STEPPER_MAX_POSITION);
 }
 
 void checkSerial() {
@@ -87,21 +102,19 @@ void checkSerial() {
     Serial.print(val);
     Serial.println("]");
     if (command == "forward") {
-      stepperDirection = FORWARD;
-      stepperSteps = val;
+      stepperTargetPosition += val;
+      stepperTargetPosition = clamp(stepperTargetPosition, 0, STEPPER_MAX_POSITION);
     } else if (command == "backward") {
-      stepperDirection = BACKWARD;
-      stepperSteps = val;
+      stepperTargetPosition -= val;
+      stepperTargetPosition = clamp(stepperTargetPosition, 0, STEPPER_MAX_POSITION);
     } else if (command == "servo") {
       servoUserTargetAngle = val ? (val % (SERVO_MAX_ANGLE + 1)) : val;
     } else if (command == "frequency") {
       servoFrequency = val;
     } else if (command == "delay") {
       servoDelay = val;
-    } else if (command == "tideup") {
-      tide(UP, val);
-    } else if (command == "tidedown") {
-      tide(DOWN, val);
+    } else if (command == "tide") {
+      tide(val);
     } else if (command == "breathingstate") {
       analogWrite(RED_PIN, 0);
       analogWrite(YELLOW_PIN, 0);
@@ -116,10 +129,17 @@ void checkSerial() {
     } else if (command == "green") {
       LEDBreathingState &= ~GREEN_MASK;
       analogWrite(GREEN_PIN, val);
+    } else if (command == "ping") {
+      Serial.println("pong");
+    } else if (command == "setstepperposition") {
+      stepperCurrentPosition = clamp(val, 0, STEPPER_MAX_POSITION);
+      stepperTargetPosition  = clamp(val, 0, STEPPER_MAX_POSITION);
+      EEPROM.put(EEPROM_STEPPER_ADDR, stepperCurrentPosition);
     } else {
       Serial.println("Command not understood!");
     }
 
+    // Remove any data in the buffer.
     while(Serial.available()) {
       Serial.read();
     }
@@ -147,17 +167,20 @@ void checkServo() {
 }
 
 void checkStepper() {
-  if(stepperSteps) {
-    myStepper->step(1, stepperDirection, SINGLE);
-    switch(stepperDirection) {
-      case FORWARD:
-        ++stepperCurrentPosition;
-        break;
-      case BACKWARD:
-        --stepperCurrentPosition;
-    }
-    --stepperSteps;
-    stepperNextCheck = now + 1;
+  int stepperDirection;
+
+  if(stepperTargetPosition > stepperCurrentPosition) {
+    stepperDirection = FORWARD;
+    ++stepperCurrentPosition;
+  } else {
+    stepperDirection = BACKWARD;
+    --stepperCurrentPosition;
+  }
+
+  myStepper->step(1, stepperDirection, SINGLE);
+
+  if(stepperCurrentPosition == stepperTargetPosition) {
+    EEPROM.put(EEPROM_STEPPER_ADDR, stepperCurrentPosition);
   }
 }
 
@@ -181,15 +204,10 @@ void loop() {
   if(now >= serialNextCheck) {
     checkSerial();
   }
-  if(now >= stepperNextCheck) {
+  if(stepperTargetPosition != stepperCurrentPosition) {
     checkStepper();
-  }
-  if((now >= servoNextCheck) && (stepperSteps == 0)) {
+  } else if(now >= servoNextCheck) { // Only check servo if stepper has finished.
     checkServo();
-  }
-  if(now >= keepAliveNextCheck) {
-    Serial.println("I'm alive");
-    keepAliveNextCheck = now + 2000;
   }
   if(LEDBreathingState) {
     updateLED();
