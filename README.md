@@ -62,7 +62,7 @@ requires significant amount of a user’s attention to gain information.
 Although there are a wide range of web platforms available for accessing wave
 and tidal data, it was observed that most of these made the use of [National
 Oceanic and Atmospheric Administration’s
-(NOAA)](http://www.noaa.gov/index.html) or [National Data Buoy Center
+(NOAA)](http://www.noaa.gov/index.html) [National Data Buoy Center
 (NDBC)](http://www.ndbc.noaa.gov/) open data for providing valuable
 information. The SurfCube would reflect the data gathered from this source.
 
@@ -167,6 +167,7 @@ Here is a video of the wave actuator in action - Youtube:
 [https://youtu.be/HZYjWmM6quM](https://youtu.be/HZYjWmM6quM).
 
 ![Final Acrylic Tank](https://upload.wikimedia.org/wikipedia/commons/5/59/Scotch_yoke_animation.gif "Scotch yoke animation by BRoys - By Uploader. Licensed under CC BY-SA 2.5 via Commons")
+
 *Scotch yoke animation by BRoys - By Uploader. Licensed under CC BY-SA 2.5 via Commons*
 
 ### Water Pump
