@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script typs="text/javascript" src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
   </head>
   <body>
+    <h1>SurfCube Control Panel</h1>
+    <h2>Settings</h2>
     <div>
-      <button id="ping" type="button">Ping</button><br/>
+      <button id="ping" type="button">Ping</button>
+      <p id="pong">Pong</p>
+      <br style="clear: left;" />
     </div>
     <div>
-      <div style="display:inline-block">
+      <div style="display: inline-block;">
         <input id="amount" type="number" min="1" max="5000"></input>
       </div>
-      <div style="display:inline-block">
+      <div style="display: inline-block;">
         <button id="in" type="button">Pump in</button><br/>
         <button id="out" type="button">Pump out</button><br/>
       </div>
+      <br style="clear: left;" />
     </div>
     <div>
       <input id="tide" type="number" min="0" max="120"></input>
@@ -39,9 +44,25 @@
       <button id="breathingBtn" type="button">Set Breathing LED</button><br/>
     </div>
     <div>
+      <input id="temperature" type="number" min="0" max=18600></input>
+      <button id="temperatureBtn" type="button">Set Temperature</button><br/>
+    </div>
+    <div>
       <input id="stepperPos" type="number" min="0" max=18600></input>
       <button id="stepperPosBtn" type="button">Set Stepper Position</button><br/>
     </div>
-    <ul id="messages"></ul>
+    <h2>Demos</h2>
+    <h3>Demo 1</h3>
+    Low tide; Low waive height; Low frequency; Temperature = 14C;<br/>
+    <button id="demo1" type="button">Start</button><br/>
+    <h3>Demo 2</h3>
+    Medium tide; Low waive height; Low frequency; Temperature = 26C;<br/>
+    <button id="demo2" type="button">Start</button><br/>
+    <h3>Demo 3</h3>
+    Medium tide; Medium waive height; Medium frequency; Temperature = 17C;<br/>
+    <button id="demo3" type="button">Start</button><br/>
+    <h3>Demo 4</h3>
+    Medium tide; High waive height; High frequency; Temperature = 35C;<br/>
+    <button id="demo4" type="button">Start</button><br/>
   </body>
 </html>

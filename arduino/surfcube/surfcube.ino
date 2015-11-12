@@ -65,10 +65,8 @@ void setup() {
 
   EEPROM.get(EEPROM_STEPPER_ADDR, stepperCurrentPosition);
   stepperTargetPosition = stepperCurrentPosition;
-  /*
   Serial.print("read stepperCurrentPosition from EEPROM: ");
   Serial.println(stepperCurrentPosition);
-  */
 
   pinMode(RED_PIN, OUTPUT);
   pinMode(YELLOW_PIN, OUTPUT);
@@ -113,22 +111,18 @@ void checkSerial() {
   String command;
   int val;
   if (Serial.available() > 0) {
-    /*
     Serial.println("Data received");
-    */
     command = Serial.readStringUntil('\n');
     while(Serial.available() == 0) {}
     val = Serial.parseInt();
     // Remove new line character after reading the integer.
     Serial.readStringUntil('\n');
 
-    /*
     Serial.print("command = [");
     Serial.print(command);
     Serial.print("]; val = [");
     Serial.print(val);
     Serial.println("]");
-    */
     if (command == "forward") {
       stepperTargetPosition += val;
       stepperTargetPosition = clamp(stepperTargetPosition, 0, STEPPER_MAX_POSITION);
