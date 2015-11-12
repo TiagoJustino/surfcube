@@ -166,5 +166,5 @@ Tinkercad and 3D printed.
 Here is a video of the wave actuator in action - Youtube:
 [https://youtu.be/HZYjWmM6quM](https://youtu.be/HZYjWmM6quM).
 
-![Final Acrylic Tank](https://upload.wikimedia.org/wikipedia/commons/5/59/Scotch_yoke_animation.gif)
+![Final Acrylic Tank](https://upload.wikimedia.org/wikipedia/commons/5/59/Scotch_yoke_animation.gif "Scotch yoke animation" by BRoys - By Uploader. Licensed under CC BY-SA 2.5 via Commons)
 
