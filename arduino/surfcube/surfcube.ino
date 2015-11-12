@@ -76,13 +76,23 @@ void setup() {
 /*
    mm -> number of milimeters above the minimum.
    */
-void tide(int mm) {
+void tide(float mm) {
   float mm3, ml;
 
+  Serial.print("CUBE_BASE_AREA = ");
+  Serial.println(CUBE_BASE_AREA);
+  Serial.print("mm = ");
+  Serial.println(mm);
   mm3 = mm * CUBE_BASE_AREA;
+  Serial.print("mm3 = ");
+  Serial.println(mm3);
   ml = mm3 / 1000;
+  Serial.print("ml = ");
+  Serial.println(ml);
   stepperTargetPosition = ml * STEPS_PER_ML;
   stepperTargetPosition = clamp(stepperTargetPosition, 0, STEPPER_MAX_POSITION);
+  Serial.print("Set stepperTargetPosition to ");
+  Serial.println(stepperTargetPosition);
 }
 
 /*
@@ -145,7 +155,7 @@ void checkSerial() {
     } else if (command == "delay") {
       servoDelay = val;
     } else if (command == "tide") {
-      tide(val);
+      tide((float)val);
     } else if (command == "breathingstate") {
       analogWrite(RED_PIN, 0);
       analogWrite(YELLOW_PIN, 0);
