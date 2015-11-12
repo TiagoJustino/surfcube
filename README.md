@@ -97,8 +97,8 @@ each wave motion.
 
 * **Water Temperature:** Water temperature is indicated using breathing
 back-lights. This is done by using a combination of Red, Green and Yellow
-LEDs at the back of the display device. The lights also serve another purpose
-- it helps create interesting visual effects with the water. This, in
+LEDs at the back of the display device. The lights also serve another purpose -
+it helps create interesting visual effects with the water. This, in
 combination with the diffuse texture of the container, make the display look
 visually pleasing.
 
@@ -201,3 +201,58 @@ cube - Youtube: [https://youtu.be/0_491yBwqlU](https://youtu.be/0_491yBwqlU).
 
 ### Surfing Conditions
 
+We also try to represent surfing conditions using a small 3D printed surfer
+"Sam The Surfer". From tests, we found that the 3D printed surfer would drown
+after experiencing some really violent waves. This happened due to the odd
+weight distribution. This was later fixed by adding a heavy object (screw) to
+the base of the surfer, and using some styrofoam (See two images below).
+
+![3D printed Surfers](https://raw.githubusercontent.com/TiagoJustino/surfcube/master/images/image04.jpg)
+
+![Fixed Surfer](https://raw.githubusercontent.com/TiagoJustino/surfcube/master/images/image07.jpg)
+
+Here’s a video of Sam The Surfer - Youtube: [https://youtu.be/d6fK8g5SR70](https://youtu.be/d6fK8g5SR70)
+
+### Device Casing
+
+In order to make the final product more aesthetic, we decided to create a wood
+casing to hold the device. The sketch below describes how the acrylic container
+fits into the wooden casing. As mentioned earlier, one purpose of the wooden
+casing is hide the wave actuator from view.
+
+The case dimensions were made in Inkscape and cut using a laser cutter.
+
+![Laser cut wood case](https://raw.githubusercontent.com/TiagoJustino/surfcube/master/images/image06.jpg)
+
+![Final SurfCube](https://raw.githubusercontent.com/TiagoJustino/surfcube/master/images/image08.jpg)
+
+## The finished product
+
+After putting all the components together, we have our final finished product!
+Here is a video of the working product - Youtube (Part 1):
+[https://youtu.be/Xg0Dip0avz8](https://youtu.be/Xg0Dip0avz8)
+
+## Challenges
+
+As this project involved working with water, some major challenges were encountered, which required a lot of experimentation.
+
+1. Preventing water leakage and protecting the electronics from water damage;
+
+2. Moving water in and out of the container to represent the tidal data;
+
+3. Creating waves of varying sizes and speeds to represent the wave data.
+
+  1. Designing a 3D printing an efficient wave actuator that converts the rotational motion of the Micro Servo to a linear motion.
+
+4. Aesthetic design of the device
+
+
+## References
+
+1. Matthews, T., Rattenbury, T., Carter, S., Dey, A., & Mankoff, J  "A peripheral display toolkit". (2003).
+
+2. Jeremy M. Heiner, Scott E. Hudson, Kenichiro Tanaka. "The Information Percolator: Ambient Information Display in a Decorative Object". UIST ‘99, pg 141-148.
+
+3. Mårten Pettersson. "WaterCalls: An ambient call queue for cooperation between emergency service centers". Personal and Ubiquitous Computing 2004, pg 192-199.
+
+4. Tempescope website. http://www.tempescope.com/ 
