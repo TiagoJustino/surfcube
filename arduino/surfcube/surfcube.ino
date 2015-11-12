@@ -50,7 +50,7 @@ unsigned long keepAliveNextCheck = 0;
    6 -> yellow + green
    7 -> red + yellow + green
    */
-int LEDBreathingState = RED_MASK & YELLOW_MASK & GREEN_MASK;
+int LEDBreathingState = 7;
 int LEDRedValue = 0;
 int LEDYellowValue = 0;
 int LEDGreenValue = 0;
@@ -103,6 +103,9 @@ void checkSerial() {
     } else if (command == "tidedown") {
       tide(DOWN, val);
     } else if (command == "breathingstate") {
+      analogWrite(RED_PIN, 0);
+      analogWrite(YELLOW_PIN, 0);
+      analogWrite(GREEN_PIN, 0);
       LEDBreathingState = val;
     } else if (command == "red") {
       LEDBreathingState &= ~RED_MASK;

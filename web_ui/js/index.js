@@ -22,6 +22,12 @@ $(document).ready(function() {
     socket.emit('to serial', $( "#delay" ).val() );
   }
 
+  var sendBreathing = function() {
+    console.log("sending servo command");
+    socket.emit('to serial', "breathingstate");
+    socket.emit('to serial', $( "#breathing" ).val() );
+  }
+
   $( "#in" ).click(function() {
     console.log("sending forward command");
     socket.emit('to serial', "forward");
@@ -39,6 +45,8 @@ $(document).ready(function() {
   $( "#frequencyBtn" ).click(sendFrequency);
 
   $( "#delayBtn" ).click(sendDelay);
+
+  $( "#breathingBtn" ).click(sendBreathing);
 
   $('#height').keyup(function(e){
     if(e.keyCode == 13)
@@ -58,6 +66,13 @@ $(document).ready(function() {
     if(e.keyCode == 13)
     {
       sendDelay();
+    }
+  });
+
+  $('#breathing').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+      sendBreathing();
     }
   });
 
