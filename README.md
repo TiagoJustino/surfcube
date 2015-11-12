@@ -131,7 +131,7 @@ After two rounds of prototyping, we arrived at this design for the project.
 
 ### Water Tank
 
-The image below the acrylic cube which acts as the container for the water.
+The image shows below the acrylic cube which acts as the container for the water.
 This ‘tank’ is designed in a rectangular manner, so that it may accommodate the
 wave actuator, which will discuss shortly. The finished product is designed
 such that, only a cubical part of the ‘tank’ is visible, thereby hiding the
@@ -145,4 +145,26 @@ container. However, we concluded that adding this part provided no design
 significance in terms of aesthetics, with the added possibility that it might
 impede the flow of waves.
 
+![SurfCube Sketch](https://raw.githubusercontent.com/TiagoJustino/surfcube/master/images/image01.jpg)
+
+![Final Acrylic Tank](https://raw.githubusercontent.com/TiagoJustino/surfcube/master/images/image02.jpg)
+
+### Wave Actuator
+
+After testing different types of mechanical actuators, we were able to
+successfully able to generate waves using a [Scotch-Yoke
+mechanism](https://commons.wikimedia.org/wiki/File:Scotch_yoke_animation.gif#/media/File:Scotch_yoke_animation.gif).
+This was necessary to use as we needed to convert the rotational motion from
+the Micro Servo Motor to linear motion. We added a flat platform surface that
+would create the waves in the tank. The design of the mechanism also ensures
+that the actuator maintains a strict linear motion and does not sway from the
+force of the water.
+
+The actuator can be seen in the image above. This part was designed using
+Tinkercad and 3D printed.
+
+Here is a video of the wave actuator in action - Youtube:
+[https://youtu.be/HZYjWmM6quM](https://youtu.be/HZYjWmM6quM).
+
+![Final Acrylic Tank](https://upload.wikimedia.org/wikipedia/commons/5/59/Scotch_yoke_animation.gif)
 
