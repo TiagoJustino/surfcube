@@ -94,16 +94,25 @@ void tide(int mm) {
    30 >    red
    */
 void setTemperature(int temperature) {
+  analogWrite(RED_PIN, 0);
+  analogWrite(YELLOW_PIN, 0);
+  analogWrite(GREEN_PIN, 0);
+  LEDBreathingState = 0;
   if(temperature <= 15) {
-    LEDBreathingState = 1;
+    LEDBreathingState = 4;
+    Serial.println("Setting led to green");
   } else if(15 < temperature && temperature <= 20) {
-    LEDBreathingState = 3;
+    LEDBreathingState = 6;
+    Serial.println("Setting led to green + yellow");
   } else if(20 < temperature && temperature <= 25) {
     LEDBreathingState = 2;
+    Serial.println("Setting led to yellow");
   } else if(25 < temperature && temperature <= 30) {
-    LEDBreathingState = 6;
+    LEDBreathingState = 3;
+    Serial.println("Setting led to yellow + red");
   } else if(30 < temperature) {
-    LEDBreathingState = 4;
+    LEDBreathingState = 1;
+    Serial.println("Setting led to red");
   }
 }
 
