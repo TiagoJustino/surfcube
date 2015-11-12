@@ -53,9 +53,6 @@ unsigned long keepAliveNextCheck = 0;
    7 -> red + yellow + green
    */
 int LEDBreathingState = 0;
-int LEDRedValue = 0;
-int LEDYellowValue = 0;
-int LEDGreenValue = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -86,6 +83,28 @@ void tide(int mm) {
   ml = mm3 / 1000;
   stepperTargetPosition = ml * STEPS_PER_ML;
   stepperTargetPosition = clamp(stepperTargetPosition, 0, STEPPER_MAX_POSITION);
+}
+
+/*
+   Temperature in Celsius
+      < 15 green
+   15 - 20 green + yellow
+   20 - 25 yellow
+   25 - 30 yellow + red
+   30 >    red
+   */
+void setTemperature(int temperature) {
+  if(temperature <= 15) {
+    LEDBreathingState = 1;
+  } else if(15 < temperature && temperature <= 20) {
+    LEDBreathingState = 3;
+  } else if(20 < temperature && temperature <= 25) {
+    LEDBreathingState = 2;
+  } else if(25 < temperature && temperature <= 30) {
+    LEDBreathingState = 6;
+  } else if(30 < temperature) {
+    LEDBreathingState = 4;
+  }
 }
 
 void checkSerial() {
@@ -135,6 +154,8 @@ void checkSerial() {
       stepperCurrentPosition = clamp(val, 0, STEPPER_MAX_POSITION);
       stepperTargetPosition  = clamp(val, 0, STEPPER_MAX_POSITION);
       EEPROM.put(EEPROM_STEPPER_ADDR, stepperCurrentPosition);
+    } else if (command == "temperature") {
+      setTemperature(val);
     } else {
       Serial.println("Command not understood!");
     }
