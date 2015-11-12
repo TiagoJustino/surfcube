@@ -82,17 +82,14 @@ Water will be used as a medium for communicating this data.
 * **Tide Height:** Water level in the display container is adjusted based on
 tidal height data. This is done using a dual-syringe pump system that is
 controlled using a stepper motor. This setup allows for injecting or pumping
-water out of the container as required.
-
-Through a series of tests, we found that 62 steps of the Stepper Motor allows
-us to fill 1 mm of water in the tank.
+water out of the container as required. Through a series of tests, we found
+that 62 steps of the Stepper Motor allows us to fill 1 mm of water in the tank.
 
 * **Wave Height:** Small waves are generated based on wave height data. The
 waves are generated using a mechanical actuator using a Micro Servo motor.
 The rotation motion of the servo motor is converted into linear motion using
-a scotch-yoke actuator, which holds a platform that creates the waves.
-
-For different wave height values, we adjust the max rotation arc of the servo
+a scotch-yoke actuator, which holds a platform that creates the waves. For
+different wave height values, we adjust the max rotation arc of the servo
 motor, as well as the speed with which it moves.
 
 * **Wave Period:** The wave period is displayed by adjusting the gap between
@@ -108,4 +105,44 @@ visually pleasing.
 * **Surfing Conditions:** A floating 3D printed ‘surfer’ was created to
 indicate surfing conditions in the water. The back-lights of the device make
 the surfer easy to notice.
+
+## Materials
+
+The following materials were used in this project:
+
+* [Acrylic Sheets](http://www.lowes.com/pd_55844-1638-11G0810A_0__?productId=3143395) - 8in x 10in x 0.083in (used for prototyping)
+* [Acrylic Sheets](https://www.homedepot.ca/en/home/p.clear-acrylic-sheet---118-inch-x-36-inch-x-72-inch.1000126445.html?redir=s) - 36in x 72in x 0.118in
+* [Arduino Uno](http://www.adafruit.com/products/50)
+* [Adafruit motor shield](http://www.adafruit.com/products/1438)
+* [Micro Servo (x 1)](http://www.adafruit.com/products/1438)
+* [200 step DC Stepper Motor (x 1)](http://www.adafruit.com/products/1438)
+* Sheet of wood (x1)
+* [150ml Syringe (x2)](http://www.amazon.com/gp/product/B013DI05HI)
+* Red, Green and Yellow LEDs (2 each)
+* [Threaded Rod](http://www.amazon.com/gp/product/B00HS7VYIU)
+* [Motor Shaft Coupler](http://www.amazon.com/gp/product/B00DCAINOU)
+* 12V DC Power Adapter
+* Silicone Sealant (x1)
+* Hot Glue
+
+## Design & Method
+
+After two rounds of prototyping, we arrived at this design for the project.
+
+### Water Tank
+
+The image below the acrylic cube which acts as the container for the water.
+This ‘tank’ is designed in a rectangular manner, so that it may accommodate the
+wave actuator, which will discuss shortly. The finished product is designed
+such that, only a cubical part of the ‘tank’ is visible, thereby hiding the
+actuator from view. The various dimensions were designed using Inkscape and
+Adobe Illustrator, and cut from an acrylic sheet using a laser cutter.
+
+This phase had to be completed first so as to be able to test various
+mechanical actuators in the given configuration. As the sketch suggests, we
+discussed the possibility of using a mesh to separate the two parts of the
+container. However, we concluded that adding this part provided no design
+significance in terms of aesthetics, with the added possibility that it might
+impede the flow of waves.
+
 
