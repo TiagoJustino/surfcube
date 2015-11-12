@@ -22,7 +22,7 @@ var onSerialOpen = function()
 	//When we get data from the serial port...
 	serial.on('data', function(data)
 	{
-		console.log("got some data from Photon: ", data);
+		console.log("got some data from Arduino: ", data);
 
 		//Send to the browser; 'data' is the name of the event
 		io.emit('to browser', data);
