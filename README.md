@@ -167,4 +167,37 @@ Here is a video of the wave actuator in action - Youtube:
 [https://youtu.be/HZYjWmM6quM](https://youtu.be/HZYjWmM6quM).
 
 ![Final Acrylic Tank](https://upload.wikimedia.org/wikipedia/commons/5/59/Scotch_yoke_animation.gif "Scotch yoke animation by BRoys - By Uploader. Licensed under CC BY-SA 2.5 via Commons")
+*Scotch yoke animation by BRoys - By Uploader. Licensed under CC BY-SA 2.5 via Commons*
+
+### Water Pump
+
+A dual-syringe pump mechanism was designed for pumping water in/out of the cube
+based on tide height levels. The pump system is controlled using a DC Stepper
+Motor. The design for this system was inspired by
+[this](https://hackaday.io/project/1838-open-syringe-pump). The threaded rod
+and bolt for the motor were purchased separately, and were crucial for
+operating this system.
+
+The parts that hold the syringe were designed using Tinkercad and 3D printed.
+
+![Stepper-controlled water pump](https://raw.githubusercontent.com/TiagoJustino/surfcube/master/images/image05.jpg)
+
+Here is a video of the water pump in action - Youtube: [https://youtu.be/-vanxsn2oxY](https://youtu.be/-vanxsn2oxY)
+
+### Lighting
+
+Red, Green and Yellow LEDs were used to provide a backlight in the display
+case. This, in combination with the water, adds a good visual effect to the
+display. The LEDs are made to glow in a breathing pattern, that appears to
+complement the water flow (code was taken from
+[here](http://sean.voisen.org/blog/2011/10/breathing-led-with-arduino/)).
+
+The LEDs are placed such that they illuminate the display from one of the side
+walls. This is done by placing them between one of the outer walls of the cube,
+and the wooden case.
+
+Here is a short video on how the cube looks with light breathing through the
+cube - Youtube: [https://youtu.be/0_491yBwqlU](https://youtu.be/0_491yBwqlU).
+
+### Surfing Conditions
 
